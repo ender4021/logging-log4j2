@@ -118,7 +118,11 @@ public final class NDC {
      * @return String The innermost diagnostic context.
      */
     public static String pop() {
-        return org.apache.logging.log4j.ThreadContext.pop();
+        try {
+            return org.apache.logging.log4j.ThreadContext.pop();
+        } catch (java.util.NoSuchElementException ex) {
+            return "";
+        }
     }
 
     /**
